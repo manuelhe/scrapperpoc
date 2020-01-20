@@ -1,10 +1,5 @@
-import fs from "fs";
-import Config from "./modules/Config";
-import { fetchASUPrograms } from "./modules/fetchData";
-import parseToCsv from "./modules/parseToCsv";
-import scrapPrograms from "./modules/scrapPrograms";
+import AsuScrapper from "./modules/AsuScrapper";
 
-const { asuAPIUrl, asuBasePath } = Config;
 const args = process.argv.slice(2);
 const isDryRun = args.includes("dry-run");
 
@@ -15,30 +10,7 @@ if (isDryRun) {
 const filename = args.length ? args[0] : "programs.csv";
 
 const init = async () => {
-  if (isDryRun) {
-    console.info("\x1b[35m%s\x1b[0m", "Starting dry-run process...\n");
-  } else {
-    console.info("\x1b[36m%s\x1b[0m", "Starting scrapping process...\n");
-  }
-
-  const asuData = await fetchASUPrograms(asuAPIUrl);
-
-  console.info(`Trying to fetch data from ${asuData.length} pages\n`);
-
-  const scrappedData = await scrapPrograms(asuData, asuBasePath, isDryRun);
-
-  console.info("\x1b[36m%s\x1b[0m", `\nData fetched succesfully from ${scrappedData.length} pages\n`);
-
-  if (!isDryRun) {
-    const csv = parseToCsv(scrappedData);
-
-    fs.writeFile(filename, csv, (err) => {
-      if (err) {
-        console.log(err);
-      }
-      console.log("\x1b[32m%s\x1b[0m", `CSV file stored in: ${filename}`);
-    });
-  }
+  await AsuScrapper(isDryRun, filename);
 };
 
 init();
