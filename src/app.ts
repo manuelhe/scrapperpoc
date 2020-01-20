@@ -1,10 +1,10 @@
 import fs from "fs";
+import Config from "./modules/Config";
 import { fetchASUPrograms } from "./modules/fetchData";
 import parseToCsv from "./modules/parseToCsv";
 import scrapPrograms from "./modules/scrapPrograms";
 
-const asuBasePath = "https://asuonline.asu.edu";
-const asuAPIUrl = "https://api.edpl.us/v1/asuo/programs";
+const { asuAPIUrl, asuBasePath } = Config;
 const args = process.argv.slice(2);
 const isDryRun = args.includes("dry-run");
 
