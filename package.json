@@ -12,7 +12,6 @@
     "axios": "^0.19.1",
     "cheerio": "^1.0.0-rc.3",
     "dotenv": "^8.2.0",
-    "drupal-jsonapi-client": "^3.1.0",
     "json2csv": "^4.5.4"
   },
   "devDependencies": {
