@@ -30,6 +30,10 @@ export default (programs: any[]): string => {
       value: "interestareas[5]",
     },
     {
+      label: "image",
+      value: "degreeimage",
+    },
+    {
       label: "description",
       value: "shortdesc",
     },
@@ -52,7 +56,10 @@ export default (programs: any[]): string => {
       label: "total-classes",
       value: "totalclasses",
     },
-    "credits",
+    {
+      label: "credits",
+      value: "totalcredithours",
+    },
     {
       label: "program-study",
       value: "programstudy",
