@@ -2,58 +2,68 @@ import { Parser } from "json2csv";
 
 export default (programs: any[]): string => {
   const fields = [
-    "code",
-    "title",
-    "category",
     {
-      label: "interest-areas",
-      value: "interestareas[0]",
+      label: "courseId",
+      value: "code",
     },
     {
-      label: "interest-areas",
-      value: "interestareas[1]",
+      label: "programName",
+      value: "title",
     },
     {
-      label: "interest-areas",
-      value: "interestareas[2]",
+      label: "programType",
+      value: "category",
     },
     {
-      label: "interest-areas",
-      value: "interestareas[3]",
+      label: "description",
+      value: "shortdesc",
     },
     {
-      label: "interest-areas",
-      value: "interestareas[4]",
+      label: "prerequisites",
+      value: "entryRequirements",
     },
+    "overview",
+    "degreeRequirements",
+    "curriculum",
+    "careers",
     {
-      label: "interest-areas",
-      value: "interestareas[5]",
+      label: "next-start-date",
+      value: "startDate",
     },
     {
       label: "image",
       value: "degreeimage",
     },
     {
-      label: "description",
-      value: "shortdesc",
-    },
-    "overview",
-    {
-      label: "entry-requirements",
-      value: "entryRequirements",
+      label: "interestAreas",
+      value: "interestareas[0]",
     },
     {
-      label: "degree-requirements",
-      value: "degreeRequirements",
+      label: "interestAreas",
+      value: "interestareas[1]",
     },
-    "curriculum",
-    "careers",
     {
-      label: "weeks-per-class",
+      label: "interestAreas",
+      value: "interestareas[2]",
+    },
+    {
+      label: "interestAreas",
+      value: "interestareas[3]",
+    },
+    {
+      label: "interestAreas",
+      value: "interestareas[4]",
+    },
+    {
+      label: "interestAreas",
+      value: "interestareas[5]",
+    },
+    {
+      label: "weeksPerClass",
       value: "weeksperclass",
     },
     {
-      label: "total-classes",
+      label: "totalClasses",
       value: "totalclasses",
     },
     {
@@ -61,12 +71,8 @@ export default (programs: any[]): string => {
       value: "totalcredithours",
     },
     {
-      label: "program-study",
+      label: "programStudy",
       value: "programstudy",
-    },
-    {
-      label: "next-start-date",
-      value: "nextstartdate",
     },
   ];
   const jsonParser = new Parser({ fields });
