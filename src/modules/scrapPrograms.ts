@@ -1,3 +1,4 @@
+import sanitize from "sanitize-html";
 import { fetchData } from "./fetchData";
 
 interface IScrappedData {
@@ -5,7 +6,27 @@ interface IScrappedData {
   curriculum: string;
   entryRequirements: string;
   overview: string;
+  rawCareers: string;
+  rawCurriculum: string;
+  rawEntryRequirements: string;
+  rawOverview: string;
 }
+
+const sanitizeOptions = {
+  allowedAttributes: {},
+  allowedTags: ["h1", "h2", "h3", "h4", "h5", "h6", "blockquote", "p", "ul", "ol",
+    "nl", "li", "b", "i", "strong", "em", "strike", "code", "hr", "br",
+  ],
+  transformTags: {
+    div: "p",
+    table: "ul",
+    tr: "li",
+  },
+};
+
+const htmlCleanup = (html: string): string => {
+  return sanitize(html, sanitizeOptions).trim().replace(/\s+/g, " ");
+};
 
 const fetchProgramInfo = async (url: string, isDryRun: boolean): Promise<IScrappedData> => {
   try {
@@ -16,12 +37,20 @@ const fetchProgramInfo = async (url: string, isDryRun: boolean): Promise<IScrapp
     }
 
     const $ = await fetchData(url);
+    const rawCareers = $("#careers-content .program-tab-content").html();
+    const rawCurriculum = $("#courses-content .program-tab-content").html();
+    const rawEntryRequirements = $("#admissions-content .program-tab-content .requirements").html();
+    const rawOverview = $("#details-content .program-tab-content").html();
 
     return {
-      careers: $("#careers-content .program-tab-content .related-careers").html(),
-      curriculum: $("#courses-content .program-tab-content").html(),
-      entryRequirements: $("#admissions-content .program-tab-content .requirements").html(),
-      overview: $("#details-content .program-tab-content").html(),
+      careers: htmlCleanup(rawCareers),
+      curriculum: htmlCleanup(rawCurriculum),
+      entryRequirements: htmlCleanup(rawEntryRequirements),
+      overview: htmlCleanup(rawOverview),
+      rawCareers,
+      rawCurriculum,
+      rawEntryRequirements,
+      rawOverview,
     };
 
   } catch (error) {

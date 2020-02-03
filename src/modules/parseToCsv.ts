@@ -27,8 +27,8 @@ export default (programs: any[]): string => {
     "curriculum",
     "careers",
     {
-      label: "next-start-date",
-      value: "startDate",
+      label: "startDate",
+      value: "nextstartdate",
     },
     {
       label: "image",
@@ -74,6 +74,10 @@ export default (programs: any[]): string => {
       label: "programStudy",
       value: "programstudy",
     },
+    "rawCareers",
+    "rawCurriculum",
+    "rawEntryRequirements",
+    "rawOverview",
   ];
   const jsonParser = new Parser({ fields });
 
