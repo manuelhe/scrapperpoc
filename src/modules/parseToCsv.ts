@@ -26,6 +26,7 @@ export default (programs: any[]): string => {
     "degreeRequirements",
     "curriculum",
     "careers",
+    "college",
     {
       label: "startDate",
       value: "nextstartdate",

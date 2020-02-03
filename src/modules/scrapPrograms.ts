@@ -3,6 +3,7 @@ import { fetchData } from "./fetchData";
 
 interface IScrappedData {
   careers: string;
+  college: string;
   curriculum: string;
   entryRequirements: string;
   overview: string;
@@ -25,8 +26,13 @@ const sanitizeOptions = {
 };
 
 const htmlCleanup = (html: string): string => {
-  return sanitize(html, sanitizeOptions).trim().replace(/\s+/g, " ");
+  return sanitize(html, sanitizeOptions)
+    .trim()
+    .replace(/\s+/g, " ")
+    .replace("&lt;", "<")
+    .replace("&gt;", ">");
 };
+const collegeSeparator = "<h3>Faculty</h3>";
 
 const fetchProgramInfo = async (url: string, isDryRun: boolean): Promise<IScrappedData> => {
   try {
@@ -41,10 +47,12 @@ const fetchProgramInfo = async (url: string, isDryRun: boolean): Promise<IScrapp
     const rawCurriculum = $("#courses-content .program-tab-content").html();
     const rawEntryRequirements = $("#admissions-content .program-tab-content .requirements").html();
     const rawOverview = $("#details-content .program-tab-content").html();
+    const college = rawCurriculum.substr(rawCurriculum.indexOf(collegeSeparator) + collegeSeparator.length);
 
     return {
       careers: htmlCleanup(rawCareers),
-      curriculum: htmlCleanup(rawCurriculum),
+      college: htmlCleanup(college),
+      curriculum: htmlCleanup(rawCurriculum.substr(0, rawCurriculum.indexOf(collegeSeparator))),
       entryRequirements: htmlCleanup(rawEntryRequirements),
       overview: htmlCleanup(rawOverview),
       rawCareers,
