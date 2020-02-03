@@ -7,6 +7,10 @@ import scrapPrograms from "./scrapPrograms";
 const { asuAPIUrl, asuBasePath } = Config;
 
 export default async (isDryRun: boolean, filename: string) => {
+  const profileInfo = {
+    startTime: Date.now(),
+  };
+
   if (isDryRun) {
     console.info("\x1b[35m%s\x1b[0m", "Starting dry-run process...\n");
   } else {
@@ -31,4 +35,13 @@ export default async (isDryRun: boolean, filename: string) => {
       console.log("\x1b[32m%s\x1b[0m", `CSV file stored in: ${filename}`);
     });
   }
+
+  // Profiling info
+  const date = new Date(Date.now() - profileInfo.startTime);
+  const h = date.getUTCHours();
+  const m = date.getUTCMinutes();
+  const s = date.getUTCSeconds();
+
+  console.log("\n\x1b[42m%s\x1b[0m", `Total programs scrapped: ${scrappedData.length}`);
+  console.log("\x1b[36m%s\x1b[0m", `Time spent: ${((h * 60) + m)} mins ${s} secs`);
 };
