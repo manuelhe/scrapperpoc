@@ -4,6 +4,7 @@ import { fetchData } from "./fetchData";
 
 interface IScrappedData {
   academicPartnerId: string;
+  academicPartnerShortName: string;
   careers: string;
   college: string;
   curriculum: string;
@@ -53,6 +54,7 @@ const fetchProgramInfo = async (url: string, isDryRun: boolean): Promise<IScrapp
 
     return {
       academicPartnerId: Config.academicPartnerId,
+      academicPartnerShortName: Config.academicPartnerShortName,
       careers: htmlCleanup(rawCareers),
       college: htmlCleanup(college),
       curriculum: htmlCleanup(rawCurriculum.substr(0, rawCurriculum.indexOf(collegeSeparator))),
