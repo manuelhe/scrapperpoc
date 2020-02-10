@@ -2,6 +2,7 @@ import { Parser } from "json2csv";
 
 export default (programs: any[]): string => {
   const fields = [
+    "academicPartnerId",
     {
       label: "courseId",
       value: "code",
@@ -36,27 +37,27 @@ export default (programs: any[]): string => {
       value: "degreeimage",
     },
     {
-      label: "interestAreas",
+      label: "interestAreas1",
       value: "interestareas[0]",
     },
     {
-      label: "interestAreas",
+      label: "interestAreas2",
       value: "interestareas[1]",
     },
     {
-      label: "interestAreas",
+      label: "interestAreas3",
       value: "interestareas[2]",
     },
     {
-      label: "interestAreas",
+      label: "interestAreas4",
       value: "interestareas[3]",
     },
     {
-      label: "interestAreas",
+      label: "interestAreas5",
       value: "interestareas[4]",
     },
     {
-      label: "interestAreas",
+      label: "interestAreas6",
       value: "interestareas[5]",
     },
     {

@@ -1,7 +1,9 @@
 import sanitize from "sanitize-html";
+import Config from "./Config";
 import { fetchData } from "./fetchData";
 
 interface IScrappedData {
+  academicPartnerId: string;
   careers: string;
   college: string;
   curriculum: string;
@@ -50,6 +52,7 @@ const fetchProgramInfo = async (url: string, isDryRun: boolean): Promise<IScrapp
     const college = rawCurriculum.substr(rawCurriculum.indexOf(collegeSeparator) + collegeSeparator.length);
 
     return {
+      academicPartnerId: Config.academicPartnerId,
       careers: htmlCleanup(rawCareers),
       college: htmlCleanup(college),
       curriculum: htmlCleanup(rawCurriculum.substr(0, rawCurriculum.indexOf(collegeSeparator))),
