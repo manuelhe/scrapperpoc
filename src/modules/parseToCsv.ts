@@ -2,7 +2,9 @@ import { Parser } from "json2csv";
 
 export default (programs: any[]): string => {
   const fields = [
+    "id",
     "academicPartnerId",
+    "academicPartnerName",
     "academicPartnerShortName",
     {
       label: "courseId",

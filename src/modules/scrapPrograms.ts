@@ -1,9 +1,12 @@
+import generate from "nanoid/generate";
 import sanitize from "sanitize-html";
 import Config from "./Config";
 import { fetchData } from "./fetchData";
 
 interface IScrappedData {
+  id: string;
   academicPartnerId: string;
+  academicPartnerName: string;
   academicPartnerShortName: string;
   careers: string;
   college: string;
@@ -27,6 +30,8 @@ const sanitizeOptions = {
     tr: "li",
   },
 };
+
+const uuidDictionary = "abcdefghjkmnpqrstuwxyz123456789";
 
 const htmlCleanup = (html: string): string => {
   return sanitize(html, sanitizeOptions)
@@ -54,11 +59,13 @@ const fetchProgramInfo = async (url: string, isDryRun: boolean): Promise<IScrapp
 
     return {
       academicPartnerId: Config.academicPartnerId,
+      academicPartnerName: Config.academicPartnerName,
       academicPartnerShortName: Config.academicPartnerShortName,
       careers: htmlCleanup(rawCareers),
       college: htmlCleanup(college),
       curriculum: htmlCleanup(rawCurriculum.substr(0, rawCurriculum.indexOf(collegeSeparator))),
       entryRequirements: htmlCleanup(rawEntryRequirements),
+      id: generate(uuidDictionary, 10),
       overview: htmlCleanup(rawOverview),
       rawCareers,
       rawCurriculum,
